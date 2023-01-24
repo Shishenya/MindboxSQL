@@ -1,0 +1,22 @@
+CREATE TABLE Products (
+	id INT PRIMARY KEY,
+	nameProduct nvarchar(50),
+);
+
+CREATE TABLE Categories (
+	id INT PRIMARY KEY,
+	nameCategory nvarchar(50),
+);
+
+CREATE TABLE ProductsAndCategories (
+	id INT PRIMARY KEY,
+	productID INT FOREIGN KEY REFERENCES Products(id),
+	categoryID INT FOREIGN KEY REFERENCES Categories(id),
+)
+
+SELECT P."nameProduct", C."nameCategory"
+FROM Mindbox.dbo.Products P
+LEFT JOIN Mindbox.dbo.ProductsAndCategories PC
+	ON P.Id = PC.productID
+LEFT JOIN Mindbox.dbo.Categories C
+	ON PC.categoryID = C.Id;
